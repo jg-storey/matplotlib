@@ -1,0 +1,136 @@
+/** {
+  outline: 1px solid red;
+}*/
+
+html{
+    scroll-behavior: smooth;
+  }
+
+body{
+    font-family:  'Barlow','Roboto','Source Sans Pro','Open Sans','Lato',Helvetica, Arial, sans-serif;
+    font-size:100%;
+    /*background-color: ghostwhite;*/
+    background: rgb(0,8,34);
+    background: linear-gradient(90deg, rgba(0,8,34,1) 10%, rgba(0,0,0,1) 50%, rgba(0,8,34,1) 90%);
+    overflow-x: hidden;
+  }
+
+
+.headerdiv{
+    overflow: hidden;
+    background-color:rgba(0, 110, 255, 0.247);
+    margin-bottom: 1.3rem;
+    margin-top: 0.6rem;
+    margin-left: 0.0rem;
+    margin-right: 0.0rem;
+    border-width:1px;
+    border-style:solid;
+    border-color:rgb(0, 153, 255);
+    box-shadow: 0 2px 5px 0 rgb(0, 153, 255, 0.26),0 2px 10px 0 rgb(0, 153, 255, 0.22);  
+  }
+  
+  .title{
+    color: rgb(174, 216, 255);
+    text-shadow: 0 0 0.6rem rgb(174, 216, 255, 0.5);
+    text-align: center;
+    font-size:1.9rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  
+  p{
+    text-align: center;
+    color:rgb(174, 216, 255);
+  }
+
+a{
+    color:springgreen;
+    text-decoration: none;
+}
+
+
+img{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    padding:10px;
+    max-width:80vw;
+}
+
+
+.codebox{
+    max-width:100ch;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 1.6rem; /* Place the button at the bottom of the page */
+    right: 2rem; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: 1px dashed rgb(174, 216, 255); /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color:rgba(0, 110, 255, 0.147); /* Set a background color */
+    color:rgb(174, 216, 255); /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 1rem; /* Some padding */
+    font-size: 1rem; /* Increase font size */
+    /*box-shadow: 0 2px 5px 0 rgb(0, 153, 255, 0.26),0 2px 10px 0 rgb(0, 153, 255, 0.22);  */
+  }
+  
+  #myBtn:hover {
+    background-color: rgba(0, 110, 255, 0.247); /* Add a dark-grey background on hover */
+    border: 1px solid rgb(174, 216, 255); /* Remove borders */
+    box-shadow: 0 2px 5px 0 rgb(0, 153, 255, 0.26),0 2px 10px 0 rgb(0, 153, 255, 0.22);  
+  }
+  
+
+  .gallery{
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom:1rem;
+    width: 90%;
+    display:grid;
+    /*grid-auto-flow: column;
+    grid-auto-columns: 1fr;*/
+    /*grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    */
+    grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+    gap:1em;
+  counter-reset: css-counter 0; /* initializes counter to 0; use -1 for zero-based numbering */
+}
+
+.gallery-item{
+    box-shadow: 0 2px 5px 0 rgb(0, 153, 255, 0.26),0 2px 10px 0 rgb(0, 153, 255, 0.22);  
+    background-color: rgb(0,0,0,0);
+    width:100%;
+  border-style:solid;
+  border-color:rgb(0, 153, 255);
+  border-width:1px;
+}
+
+.gallery-item:hover {
+  
+   border-color: rgb(0, 238, 255);
+}
+
+.gallery-item img, .gallery-item p{
+   display:block;
+   margin-left:auto;
+   margin-right:auto;
+   max-width:90%;
+   margin-top:1rem;
+}
+
+.gallery-item p{
+  counter-increment: css-counter 1; /* Increase the counter by 1. */
+}
+
+.gallery-item p:before{
+  content: counter(css-counter) ". "; /* Apply counter before children's content. */
+}
