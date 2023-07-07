@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot Gallery</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <p class="title">Python Plotting Examples</p>
+    </div>
+
+    
+
+    <div class="gallery">
+
+
+        <div class="gallery-item">
+            <a href="index.html">
+                <img src="img/basic_plot1.png" alt="Basic plot 1">
+            </a>
+            <p>Basic Plot of a Function</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index2.html">
+                <img src="img/basic_plot2.png" alt="Basic plot 2">
+            </a>
+            <p>Plot With Two Curves</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index3.html">
+                <img src="img/basic_plot3.png" alt="Basic plot 3">
+            </a>
+            <p>Plot From csv File</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index4.html">
+                <img src="img/basic_plot4.png" alt="Basic plot 4">
+            </a>
+            <p>Multiple Plots</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index5.html">
+                <img src="img/colour_plot1.png" alt="Colour plot 1">
+            </a>
+            <p>2D Colour Plot</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index6.html">
+                <img src="img/animation.gif" alt="Basic animation">
+            </a>
+            <p>Animated Plot</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index7.html">
+                <img src="img/rainbow.png" alt="Rainbow plot">
+            </a>
+            <p>Rainbow Plot</p>
+        </div>
+
+        <div class="gallery-item">
+            <a href="index8.html">
+                <img src="img/rainbow_dark.png" alt="Dark rainbow plot">
+            </a>
+            <p>Dark Rainbow Plot</p>
+        </div>
+
+        </div>
+
+    
+   
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>
