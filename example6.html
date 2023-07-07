@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Plot</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <p class="title">6. Animated Plot</p>
+    </div>
+
+    <img src="img/animation.gif" alt="Basic animation">
+
+
+    <div class="codebox">
+        <pre class="line-numbers"><code class="language-python">
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from matplotlib.animation import PillowWriter
+
+matplotlib.rcParams['font.sans-serif'] = "Arial"
+# Then, "ALWAYS use sans-serif fonts"
+matplotlib.rcParams['font.family'] = "sans-serif"
+
+
+# Create the figure
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
+
+# Some axis variables
+xlabel = 'E'
+ylabel = 'N'
+
+x1 = -3
+x2 = 3
+
+y1 = 0
+y2 = 5
+
+# Setting axis parameters
+ax1.tick_params('both', labelsize=14, width=1,direction='in', pad=10);
+ax1.set_xlabel(xlabel, fontsize=16,labelpad=12)
+ax1.set_ylabel(ylabel,fontsize=16,labelpad=12)
+ax1.set_xlim(x1,x2);
+ax1.set_ylim(y1,y2)
+ax1.spines['bottom'].set_linewidth(1.0)
+ax1.spines['left'].set_linewidth(1.0)
+ax1.spines['top'].set_linewidth(1.0)
+ax1.spines['right'].set_linewidth(1.0)
+
+plt.subplots_adjust(bottom=0.2)
+
+
+# Function to plot
+def dos(E,D):
+    if np.abs(E)>D:
+        return np.abs(E)/np.sqrt(E**2-D**2)
+    else:
+        return 0
+
+# The parameter that varies with time
+def DeltaT(T):
+    if(T&lt;1):
+        return (1.0-T**3.4951)**0.54314	
+    else:
+        return 0
+    
+# Set up the plot
+xlist = []
+ylist = []
+plot, = ax1.plot(xlist,ylist, linewidth=1, linestyle="-", color='red')
+
+# Set up the gif
+outfile = 'animation.gif'
+metadata = dict(title='Movie',artist='user')
+writer = PillowWriter(fps=15,metadata=metadata)
+
+
+xlist = np.arange(-3,3,0.001)
+
+# Loop from T = 0 to 1.2 in 50 steps
+# calculate the function at each step
+# and save each frame to the gif.
+with writer.saving(fig, outfile, 100):
+    for Tval in np.linspace(0, 1.2, 50):
+        delta = DeltaT(Tval)     
+        ylist=[]
+        for xval in xlist:
+                ylist.append(dos(xval,delta))
+
+        plot.set_data(xlist,ylist)
+        writer.grab_frame()            
+            </code>
+        </pre>
+    </div>
+    <script src="prism.js"></script>
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Plot</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <p class="title">4. 2D Colour Plot</p>
+    </div>
+
+    <img src="img/colour_plot1.png" alt="Colour plot 1">
+
+
+    <div class="codebox">
+        <pre class="line-numbers"><code class="language-python">
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+
+matplotlib.rcParams['font.sans-serif'] = "Arial"
+# Then, "ALWAYS use sans-serif fonts"
+matplotlib.rcParams['font.family'] = "sans-serif"
+
+
+# Create some data
+x = np.arange(-3.0, 3.01, 0.01)
+y = np.arange(-3.0, 3.01, 0.01)
+X, Y = np.meshgrid(x, y)
+
+Z = -0.5*(np.cos(X)+np.cos(Y))-0.25*np.cos(X)*np.cos(Y)
+
+
+# Create the figure
+fig = plt.figure(figsize=(15,5))
+ax1 = fig.add_subplot(1,1,1)
+
+mycmap1 = plt.get_cmap('terrain')
+ax1.set_aspect('equal')
+ax1.set_title('$-0.5(\cos{x}+\cos{y})-0.25\cos{x}\cos{y}$')
+
+cf1 = ax1.imshow(Z,cmap=mycmap1,extent=[x.min(),x.max(),y.min(),y.max()],vmin = -1.25, vmax = 0.75)
+
+fig.colorbar(cf1, ax=ax1)
+
+
+
+outfile = 'colour_plot1.png'
+
+# Save the plot
+plt.savefig(outfile, format="png", bbox_inches='tight')    
+plt.show()
+            </code>
+        </pre>
+    </div>
+    <script src="prism.js"></script>
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>

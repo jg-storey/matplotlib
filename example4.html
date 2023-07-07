@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Plots</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <p class="title">4. Multiple Plots</p>
+    </div>
+
+    <img src="img/basic_plot4.png" alt="Basic plot 4">
+
+    <p>Uses text to denote (a) and (b).</p>
+
+    <div class="codebox">
+        <pre class="line-numbers"><code class="language-python">
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+matplotlib.rcParams['font.sans-serif'] = "Arial"
+# Then, "ALWAYS use sans-serif fonts"
+matplotlib.rcParams['font.family'] = "sans-serif"
+
+
+# A function to plot
+def dos(E,D):
+    if np.abs(E)>D:
+        return np.abs(E)/np.sqrt(E**2-D**2)
+    else:
+        return 0
+
+
+# Create lists of function values to plot
+Elist = np.arange(-4,4,0.01)
+doslist = []
+
+for Eval in Elist:
+    doslist.append(dos(Eval,1))
+
+
+
+# A data file
+file = 'data.csv'
+delim = ',' #comma delimited
+
+# Load the data into lists
+T = np.loadtxt(file, delimiter=delim, unpack=True,skiprows=1,usecols=[0])
+R = np.loadtxt(file, delimiter=delim, unpack=True,skiprows=1,usecols=[1])
+
+
+# Some plot variables
+Tlabel = 'Temperature (K)'
+Rlabel = 'Resistance ($\Omega$)'
+
+T1 = 0
+T2 = 120
+
+R1 = 0
+R2 = 14
+
+c1 = (255.0/255,162.0/255,189.0/255) # A custom colour for the plot
+
+
+Elabel = 'E/$\Delta$'
+Doslabel = 'N'
+
+E1 = -3
+E2 = 3
+
+Dos1 = 0
+Dos2 = 3
+
+outfile = 'basic_plot4.png'
+
+
+
+# Create the figure
+fig = plt.figure(figsize=(15,5))
+
+# Create the first plot
+ax1 = fig.add_subplot(1,2,1)
+ax1.plot(Elist,doslist, label=1, linewidth=1, linestyle="-", color='blue')
+ax1.text(0.05,0.9,'(a)',color='black',fontsize=20,transform=ax1.transAxes)
+
+# Create the second plot
+ax2 = fig.add_subplot(1,2,2)
+ax2.plot(T,R, label='A', linewidth=1, linestyle="-", color=c1, marker='o')
+ax2.text(0.05,0.9,'(b)',color='black',fontsize=20,transform=ax2.transAxes)
+
+
+
+# Set axis parameters for first plot
+ax1.legend(frameon=False,title='$\Delta$',title_fontsize=20,fontsize=16,loc=1)
+ax1.tick_params('both', labelsize=14, width=1,direction='in', pad=10);
+ax1.set_xlabel(Elabel,fontsize=16,labelpad=12)
+ax1.set_xlim(E1,E2);
+ax1.set_ylabel(Doslabel,fontsize=16,labelpad=12)
+ax1.set_ylim(Dos1,Dos2);
+ax1.spines['bottom'].set_linewidth(1)
+ax1.spines['left'].set_linewidth(1)
+ax1.spines['top'].set_linewidth(1)
+ax1.spines['right'].set_linewidth(1)
+
+# Set axis parameters for second plot
+ax2.legend(frameon=True,title='Sensor',title_fontsize=16,fontsize=16,loc=4)
+ax2.tick_params('both', labelsize=14, width=1,direction='in', pad=10);
+ax2.set_xlabel(Tlabel,fontsize=16,labelpad=12)
+ax2.set_xlim(T1,T2);
+ax2.set_ylabel(Rlabel,fontsize=16,labelpad=12)
+ax2.set_ylim(R1,R2);
+ax2.spines['bottom'].set_linewidth(1)
+ax2.spines['left'].set_linewidth(1)
+ax2.spines['top'].set_linewidth(1)
+ax2.spines['right'].set_linewidth(1)
+
+
+# Save the plot
+plt.savefig(outfile, format="png", bbox_inches='tight')        
+plt.show()
+            </code>
+        </pre>
+    </div>
+    <script src="prism.js"></script>
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>

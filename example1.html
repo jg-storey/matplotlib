@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Plot</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <p class="title">1. Basic plot of a function</p>
+    </div>
+
+    <img src="img/basic_plot1.png" alt="Basic plot 1">
+
+    <div class="codebox">
+        <pre class="line-numbers"><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# The density of states (dos) function to plot
+def dos(E,D):
+    if np.abs(E)>D:
+        return np.abs(E)/np.sqrt(E**2-D**2)
+    else:
+        return 0
+
+
+# Create lists of 'x' and 'y' values to plot
+Elist = np.arange(-4,4,0.01)
+doslist = []
+
+for Eval in Elist:
+    doslist.append(dos(Eval,1))
+
+
+
+# Some plot variables
+Elabel = 'E/$\Delta$'
+Doslabel = 'N'
+
+E1 = -3
+E2 = 3
+
+Dos1 = 0
+Dos2 = 3
+
+outfile = 'basic_plot1.png'
+
+
+
+# Create the plot
+fig = plt.figure(figsize=(8,5))
+ax1 = fig.add_subplot(1,1,1)
+ax1.plot(Elist,doslist, label=1, linewidth=1, linestyle="-", color='blue')
+
+
+# Set axis parameters
+ax1.legend(frameon=False,title='$\Delta$',fontsize='large',loc=1)
+ax1.set_xlabel(Elabel)
+ax1.set_ylabel(Doslabel)
+ax1.set_xlim(E1,E2);
+ax1.set_ylim(Dos1,Dos2);
+    
+
+# Save the plot
+plt.savefig(outfile, format="png", bbox_inches='tight')        
+plt.show()
+            </code>
+        </pre>
+    </div>
+    <script src="prism.js"></script>
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>
