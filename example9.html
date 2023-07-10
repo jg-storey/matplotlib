@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Plot from File</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+
+
+
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button> 
+
+    <div class="headerdiv" id="hdiv">
+    <div class="title">9. Colour Plot from txt File</div>
+    </div>
+
+    <img src="img/color_plot2.png" alt="Colour plot from text file">
+    <p>Colour plot of data in a tab-delimited file: <a href="Grid019.txt">Grid019.txt</a></p>
+
+    <div class="codebox">
+        <pre class="line-numbers"><code class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib
+import matplotlib.cm as cm
+
+
+# Say, "the default sans-serif font is COMIC SANS"
+matplotlib.rcParams['font.sans-serif'] = "Arial"
+# Then, "ALWAYS use sans-serif fonts"
+matplotlib.rcParams['font.family'] = "sans-serif"
+matplotlib.rcParams['mathtext.fontset'] = 'dejavusans' #dejavusans'
+
+
+
+
+# Create the figure
+fig1 = plt.figure(figsize=(7,7))
+ax1 = fig1.add_axes([0,0,0.7,0.7])
+
+
+# Some variables
+
+lfsize = 20 #label font size
+tfsize = 18 #tick font size
+
+xlabel = r'$\mathit{k_x}$'
+ylabel = r'$\mathit{k_y}$'
+
+x1 = 0
+x2 = 1
+
+y1 = 0
+y2 = 1
+
+
+# File information
+files = ['Grid019.txt']
+delim = '\t' # Data delimiter
+p = ['0.19'] # Data label
+nrows, ncols = 100, 100 # Number of rows and columns
+
+
+# Load and plot the data
+data = np.loadtxt(files[0],delimiter=delim)
+datagrid = data.reshape((nrows, ncols))
+im1 = ax1.imshow(datagrid, interpolation='nearest', extent=(x1,x2,y1,y2), cmap=cm.terrain,origin='lower',vmin = 0, vmax = 100)
+
+
+# Uncomment the line below to show the color bar
+#fig1.colorbar(im1, ax=ax1)
+
+
+# Style the axes
+ax1.tick_params('both', labelsize=tfsize, width=1,direction='in', pad=10);
+
+ax1.set_xlabel(xlabel, fontsize=lfsize,labelpad=-12)
+ax1.set_ylabel(ylabel,fontsize=lfsize,labelpad=-12)
+
+ax1.set_xlim(x1,x2);
+ax1.set_ylim(y1,y2)
+
+ax1.set_xticks(np.arange(0, 1.2, step=1))
+ax1.set_yticks(np.arange(0, 1.2, step=1))
+
+ax1.set_yticklabels([0,'$\pi$'])
+ax1.set_xticklabels([0,'$\pi$'])
+
+ax1.set_aspect('equal')
+
+ax1.text(0.1,0.05,p[0],color='white',fontsize=lfsize,transform=ax1.transAxes)
+
+ax1.axvline(x=0.80, ymin=0, ymax=1, linestyle="--",color='white')
+
+
+# Save the plot
+outfile = 'color_plot2.png'
+plt.savefig(outfile, format="png", bbox_inches='tight')
+plt.show()
+            </code>
+        </pre>
+    </div>
+    <script src="prism.js"></script>
+    <script>
+         //Get the button:
+  mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  } 
+    </script>
+</body>
+</html>
